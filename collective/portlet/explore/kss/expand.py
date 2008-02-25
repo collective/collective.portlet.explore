@@ -22,7 +22,6 @@ class MyNavtreeStrategy(NavtreeStrategy):
             return False
         result = node["item"].getPath().startswith(self.root+"/") or \
                  node["item"].getPath()==self.root
-        print result, node['item'].getPath()
         return result
 
 class ExpandMenu(PloneKSSView):
