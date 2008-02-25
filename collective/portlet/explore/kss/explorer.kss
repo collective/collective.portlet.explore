@@ -1,0 +1,6 @@
+span.toggleNode:click {
+    action-server: expandNode;
+    expandNode-uid: kssAttr("uid");
+    evt-click-preventdefault: True;
+}
+
