@@ -18,7 +18,7 @@
                 li_class        python:is_current and ' navTreeCurrentNode' or '';
                 li_extr_class   python:is_in_path and ' navTreeItemInPath' or '';
                 li_folder_class python:show_children and ' navTreeFolderish' or '';"
-    tal:attributes="class string:navTreeItem visualNoMarker${li_class}${li_extr_class}${li_folder_class}"
+    tal:attributes="class string:navTreeItem visualNoMarker${li_class}${li_extr_class}${li_folder_class} node-${UID}"
     tal:condition="python:bottomLevel &lt;= 0 or level &lt;= bottomLevel">
 
     <tal:level define="item_class string:state-${node/normalized_review_state}">
@@ -36,14 +36,14 @@
                   tal:attributes="class string:kssattr-uid-${UID} toggleNode"
                   i18n:domain="collective.portlet.explore"
                   i18n:attributes="title label_expand_menu_menu">
-             Collapse</span>
+             Expand</span>
             <span class="toggleNodeStatic"
                   title="Click to expand or collapse"
                   tal:condition="python: is_folderish and children"
                   tal:attributes="class string:kssattr-uid-${UID} toggleNodeStatic"
                   i18n:domain="collective.portlet.explore"
                   i18n:attributes="title label_expand_menu_menu">
-              Expand</span>
+              Collapse</span>
         </a>
         <ul tal:attributes="class string:nodeSpinner navTree navTreeLevel navTreeLevel${level}">
             <li class="navTreeItem visualNoMarker">&nbsp;</li>
