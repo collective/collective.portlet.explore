@@ -10,7 +10,6 @@ from zope.component import getMultiAdapter
 from plone.app.layout.navigation.interfaces import INavtreeStrategy
 from plone.app.layout.navigation.interfaces import INavigationQueryBuilder
 from plone.app.layout.navigation.navtree import buildFolderTree
-from plone.app.portlets.portlets.navigation import NavtreeStrategy
 
 class ExpandMenu(PloneKSSView):
     recurse = ViewPageTemplateFile('../recurse.pt')
@@ -30,6 +29,7 @@ class ExpandMenu(PloneKSSView):
 
         queryBuilder = getMultiAdapter((root, assignment),
                                        INavigationQueryBuilder)
+        # Dragons be here
         strategy = getMultiAdapter((aq_inner(self.context), assignment), INavtreeStrategy)
         strategy.root = "/".join(root.getPhysicalPath())
         strategy.showAllParents = True
