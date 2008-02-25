@@ -1,5 +1,6 @@
 span.toggleNode:click {
     action-server: expandNode;
+    expandNode-portlethash: kssAttr("portlethash", True);
     expandNode-uid: kssAttr("uid");
     evt-click-preventdefault: True;
 }
