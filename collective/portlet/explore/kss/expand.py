@@ -1,3 +1,4 @@
+from new import instancemethod
 from Acquisition import aq_inner
 from kss.core import kssaction
 from plone.portlets.utils import unhashPortletInfo
@@ -6,23 +7,10 @@ from plone.app.portlets.utils import assignment_mapping_from_key
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
+from plone.app.layout.navigation.interfaces import INavtreeStrategy
 from plone.app.layout.navigation.interfaces import INavigationQueryBuilder
 from plone.app.layout.navigation.navtree import buildFolderTree
 from plone.app.portlets.portlets.navigation import NavtreeStrategy
-
-class MyNavtreeStrategy(NavtreeStrategy):
-    def __init__(self, context, view, root):
-        super(MyNavtreeStrategy, self).__init__(context, view)
-        self.root="/".join(root.getPhysicalPath())
-        self.showAllParents = True
-        self.rootPath = "/".join(root.getParentNode().getPhysicalPath())
-
-    def nodeFilter(self, node):
-        if not super(MyNavtreeStrategy, self).nodeFilter(node):
-            return False
-        result = node["item"].getPath().startswith(self.root+"/") or \
-                 node["item"].getPath()==self.root
-        return result
 
 class ExpandMenu(PloneKSSView):
     recurse = ViewPageTemplateFile('../recurse.pt')
@@ -42,7 +30,18 @@ class ExpandMenu(PloneKSSView):
 
         queryBuilder = getMultiAdapter((root, assignment),
                                        INavigationQueryBuilder)
-        strategy = MyNavtreeStrategy(aq_inner(self.context), assignment, root)
+        strategy = getMultiAdapter((aq_inner(self.context), assignment), INavtreeStrategy)
+        strategy.root = "/".join(root.getPhysicalPath())
+        strategy.showAllParents = True
+        strategy.rootPath = "/".join(root.getParentNode().getPhysicalPath())
+        def nodeFilter(self, node):
+            if not self._old_nodeFilter(node):
+                return False
+            return node["item"].getPath().startswith(self.root+"/") or \
+                     node["item"].getPath()==self.root
+
+        strategy._old_nodeFilter = strategy.nodeFilter
+        strategy.nodeFilter = instancemethod(nodeFilter, strategy, strategy.__class__)
 
         query=queryBuilder()
 
