@@ -5,3 +5,9 @@ span.toggleNode:click {
     evt-click-preventdefault: True;
 }
 
+span.expandedNode:click {
+    action-client: toggleClass;
+    toggleClass-value: showChildren;
+    evt-click-preventdefault: True;
+}
+

@@ -50,6 +50,12 @@ class ExpandMenu(PloneKSSView):
         html=self.recurse(children=data.get('children', []), level=1, bottomLevel=assignment.bottomLevel)
 
         core=self.getCommandSet("core")
-        core.replaceHTML("div#portletwrapper-%s li.node-%s " % (portlethash, uid),
-                        html)
+        selector="div#portletwrapper-%s li.node-%s " % (portlethash, uid)
+
+        core.replaceHTML(selector, html)
+
+        selector="div#portletwrapper-%s span.kssattr-uid-%s" % (portlethash,uid)
+        core.removeClass(selector, "toggleNode")
+        core.addClass(selector, "expandedNode")
+        core.addClass(selector, "showChildren")
 
