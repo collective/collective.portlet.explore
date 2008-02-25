@@ -14,7 +14,8 @@ class MyNavtreeStrategy(NavtreeStrategy):
     def __init__(self, context, view, root):
         super(MyNavtreeStrategy, self).__init__(context, view)
         self.root="/".join(root.getPhysicalPath())
-        self.showAllParents = False
+        self.showAllParents = True
+        self.rootPath = "/".join(root.getParentNode().getPhysicalPath())
 
     def nodeFilter(self, node):
         if not super(MyNavtreeStrategy, self).nodeFilter(node):
@@ -32,12 +33,8 @@ class ExpandMenu(PloneKSSView):
         """Expand the navtree at a given UID for a given portlet.
         """
 
-        print "XXXX"
-        print "XXXX Expanding uid %s" % uid
-
         rt=getToolByName(self.context, "reference_catalog")
         root=rt.lookupObject(uid)
-        print "XXXX Root is %s" % "/".join(root.getPhysicalPath())
 
         info=unhashPortletInfo(portlethash)
         mapping=assignment_mapping_from_key(self.context,
@@ -49,7 +46,6 @@ class ExpandMenu(PloneKSSView):
         strategy = MyNavtreeStrategy(aq_inner(self.context), assignment, root)
 
         query=queryBuilder()
-        print "XXXX Query: %s" % `query`
 
         data=buildFolderTree(root, query=query, strategy=strategy)
         html=self.recurse(children=data.get('children', []), level=1, bottomLevel=assignment.bottomLevel)
