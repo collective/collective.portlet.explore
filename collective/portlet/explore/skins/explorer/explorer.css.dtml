@@ -1,13 +1,14 @@
 /* <dtml-with base_properties> (do not remove this :) */
 /* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
 
-ul.hideChildren {
+dl.portletNavigationTree ul.hideChildren {
   display: none;
 }
 
-span.toggleNode,
-span.expandedNode,
-span.showChildren {
+dl.portletNavigationTree span.noChildren,
+dl.portletNavigationTree span.toggleNode,
+dl.portletNavigationTree span.expandedNode,
+dl.portletNavigationTree span.showChildren {
   background-repeat: no-repeat;
   background-position: 50% 50%;
   padding: 0 0 0 16px;
@@ -18,27 +19,27 @@ span.showChildren {
   display: block;
 }
 
-span.toggleNode {
+dl.portletNavigationTree span.toggleNode {
   background-image: url(twistie-closed-gray.gif);
 }
 
-span.toggleNode:hover {
+dl.portletNavigationTree span.toggleNode:hover {
   background-image: url(twistie-closed-over.gif);
 }
 
-span.expandedNode {
+dl.portletNavigationTree span.expandedNode {
   background-image: url(twistie-open-gray.gif);
 }
 
-span.expandedNode:hover {
+dl.portletNavigationTree span.expandedNode:hover {
   background-image: url(twistie-open-over.gif);
 }
 
-span.showChildren {
+dl.portletNavigationTree span.showChildren {
   background-image: url(twistie-closed-gray.gif);
 }
 
-span.showChildren:hover {
+dl.portletNavigationTree span.showChildren:hover {
   background-image: url(twistie-closed-over.gif);
 }
 

@@ -25,10 +25,15 @@
 
     <span class="toggleNode"
           title="Click to expand or collapse"
+          tal:condition="show_children"
           tal:attributes="class string:kssattr-uid-${UID} toggleNode"
           i18n:domain="collective.portlet.explore"
           i18n:attributes="title label_expand_menu_menu">
      Expand</span>
+
+    <span class="noChildren"
+          tal:condition="not:show_children">
+     &nbsp;</span>
 
     <div tal:define="item_class python:is_current and item_class + ' navTreeCurrentItem' or item_class">
 
