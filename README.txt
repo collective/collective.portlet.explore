@@ -1,7 +1,7 @@
-collective.portlet.explore Package Readme
-=========================
+Introduction
+============
 
-Overview
---------
+This package implements the *Explore* portlet for Plone 3: a navigation
+menu which supports expand/collapse. 
 
-A navigation portlet
+

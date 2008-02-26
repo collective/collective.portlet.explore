@@ -1,8 +1,8 @@
-Changelog for collective.portlet.explore
+Changelog
+=========
 
-    (name of developer listed in brackets)
+1.0 - UNRELEASED
+---------------
 
-collective.portlet.explore - 1.0 Unreleased
-
-    - Initial package structure.
-      [zopeskel]
+- First release
+  [fschulze, wichert]
