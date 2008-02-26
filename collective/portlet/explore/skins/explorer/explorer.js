@@ -12,4 +12,3 @@ kukit.actionsGlobalRegistry.register("explorer-togglechilds", function(oper) {
 });
 kukit.commandsGlobalRegistry.registerFromAction('explorer-togglechilds',
     kukit.cr.makeSelectorCommand);
-console.log("registered explorer-togglechilds");
