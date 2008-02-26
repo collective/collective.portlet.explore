@@ -1,4 +1,3 @@
-from new import instancemethod
 from Acquisition import aq_inner
 from kss.core import kssaction
 from plone.portlets.utils import unhashPortletInfo
@@ -10,6 +9,29 @@ from zope.component import getMultiAdapter
 from plone.app.layout.navigation.interfaces import INavtreeStrategy
 from plone.app.layout.navigation.interfaces import INavigationQueryBuilder
 from plone.app.layout.navigation.navtree import buildFolderTree
+
+class DecorateStrategy:
+    def __init__(self, root, strategy):
+        self.strategy=strategy
+        self.root = "/".join(root.getPhysicalPath())
+        self.showAllParents = True
+        self.rootPath = "/".join(root.getParentNode().getPhysicalPath())
+
+    def nodeFilter(self, node):
+        if not self.strategy.nodeFilter(node):
+            return False
+        return node["item"].getPath().startswith(self.root+"/") or \
+                 node["item"].getPath()==self.root
+
+    def showChildrenOf(self, rootObject):
+        return self.strategy.showChildrenOf(rootObject)
+
+    def decoratorFactory(self, newNode):
+        return self.strategy.decoratorFactory(newNode)
+
+    def subtreeFilter(self, newNode):
+        return self.strategy.subtreeFilter(newNode)
+
 
 class ExpandMenu(PloneKSSView):
     recurse = ViewPageTemplateFile('../recurse.pt')
@@ -28,19 +50,8 @@ class ExpandMenu(PloneKSSView):
 
         queryBuilder = getMultiAdapter((root, assignment),
                                        INavigationQueryBuilder)
-        # Dragons be here
         strategy = getMultiAdapter((aq_inner(self.context), assignment), INavtreeStrategy)
-        strategy.root = "/".join(root.getPhysicalPath())
-        strategy.showAllParents = True
-        strategy.rootPath = "/".join(root.getParentNode().getPhysicalPath())
-        def nodeFilter(self, node):
-            if not self._old_nodeFilter(node):
-                return False
-            return node["item"].getPath().startswith(self.root+"/") or \
-                     node["item"].getPath()==self.root
-
-        strategy._old_nodeFilter = strategy.nodeFilter
-        strategy.nodeFilter = instancemethod(nodeFilter, strategy, strategy.__class__)
+        strategy = DecorateStrategy(root, strategy)
 
         query=queryBuilder()
 
