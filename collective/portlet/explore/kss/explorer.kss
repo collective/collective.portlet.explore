@@ -2,12 +2,14 @@ span.toggleNode:click {
     action-server: expandNode;
     expandNode-portlethash: kssAttr("portlethash", True);
     expandNode-uid: kssAttr("uid");
-    evt-click-preventdefault: True;
 }
 
-span.expandedNode:click {
+span.expandedNode:click(twistie) {
     action-client: toggleClass;
     toggleClass-value: showChildren;
-    evt-click-preventdefault: True;
 }
 
+span.expandedNode:click(childs) {
+    action-client: explorer-togglechilds;
+    explorer-togglechilds-uid: kssAttr('uid', true);
+}

@@ -10,6 +10,7 @@ from plone.app.layout.navigation.interfaces import INavtreeStrategy
 from plone.app.layout.navigation.interfaces import INavigationQueryBuilder
 from plone.app.layout.navigation.navtree import buildFolderTree
 
+
 class DecorateStrategy:
     def __init__(self, root, strategy):
         self.strategy=strategy
@@ -50,7 +51,8 @@ class ExpandMenu(PloneKSSView):
 
         queryBuilder = getMultiAdapter((root, assignment),
                                        INavigationQueryBuilder)
-        strategy = getMultiAdapter((aq_inner(self.context), assignment), INavtreeStrategy)
+        strategy = getMultiAdapter((aq_inner(self.context), assignment),
+                                   INavtreeStrategy)
         strategy = DecorateStrategy(root, strategy)
 
         query=queryBuilder()
@@ -66,5 +68,4 @@ class ExpandMenu(PloneKSSView):
         selector="div#portletwrapper-%s span.kssattr-uid-%s" % (portlethash,uid)
         core.removeClass(selector, "toggleNode")
         core.addClass(selector, "expandedNode")
-        core.addClass(selector, "showChildren")
 
