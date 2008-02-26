@@ -6,6 +6,8 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="collective.portlet.explore">
 
+    <five:registerPackage package="." />
+
     <include package=".kss" />
 
     <cmf:registerDirectory
