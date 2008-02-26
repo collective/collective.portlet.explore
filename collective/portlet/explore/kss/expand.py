@@ -3,7 +3,7 @@ from Acquisition import aq_inner
 from kss.core import kssaction
 from plone.portlets.utils import unhashPortletInfo
 from plone.app.kss.plonekssview import PloneKSSView 
-from plone.app.portlets.utils import assignment_mapping_from_key 
+from plone.app.portlets.utils import assignment_from_key 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
@@ -23,9 +23,8 @@ class ExpandMenu(PloneKSSView):
         root=rt.lookupObject(uid)
 
         info=unhashPortletInfo(portlethash)
-        mapping=assignment_mapping_from_key(self.context,
-                info["manager"], info["category"], info["key"])
-        assignment=mapping[info["name"]]
+        assignment=assignment_from_key(self.context,
+                info["manager"], info["category"], info["key"], info["name"])
 
         queryBuilder = getMultiAdapter((root, assignment),
                                        INavigationQueryBuilder)
