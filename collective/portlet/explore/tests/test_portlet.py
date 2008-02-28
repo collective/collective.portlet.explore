@@ -14,15 +14,13 @@ from collective.portlet.explore.tests.base import TestCase
 
 class TestPortlet(TestCase):
 
-    def afterSetUp(self):
-        self.setRoles(('Manager',))
-
     def test_portlet_type_registered(self):
-        portlet = getUtility(IPortletType, name='collective.portlet.explore.ExplorerPortlet')
-        self.assertEquals(portlet.addview, 'collective.portlet.explore.ExplorerPortlet')
+        portlet = getUtility(IPortletType,
+                name='collective.portlet.explore.ExplorerPortlet')
+        self.assertEquals(portlet.addview,
+                'collective.portlet.explore.ExplorerPortlet')
 
     def test_interfaces(self):
-        # TODO: Pass any keyword arguments to the Assignment constructor
         portlet = explorerportlet.Assignment()
         self.failUnless(IPortletAssignment.providedBy(portlet))
         self.failUnless(IPortletDataProvider.providedBy(portlet.data))
@@ -34,20 +32,21 @@ class TestPortlet(TestCase):
             del mapping[m]
         addview = mapping.restrictedTraverse('+/' + portlet.addview)
 
-        # TODO: Pass a dictionary containing dummy form inputs from the add form
-        addview.createAndAdd(data={})
+        addview.createAndAdd(data=dict(name="name",
+                                       root="root",
+                                       currentFolderOnly="currentFolderOnly",
+                                       topLevel="topLevel",
+                                       bottomLevel="bottomLevel"))
 
         self.assertEquals(len(mapping), 1)
-        self.failUnless(isinstance(mapping.values()[0], explorerportlet.Assignment))
+        assignment=mapping.values()[0]
+        self.failUnless(isinstance(assignment, explorerportlet.Assignment))
+        self.assertEqual(assignment.name, "name")
+        self.assertEqual(assignment.root, "root")
+        self.assertEqual(assignment.currentFolderOnly, "currentFolderOnly")
+        self.assertEqual(assignment.topLevel, "topLevel")
+        self.assertEqual(assignment.bottomLevel, "bottomLevel")
 
-    # NOTE: This test can be removed if the portlet has no edit form
-    def test_invoke_edit_view(self):
-        mapping = PortletAssignmentMapping()
-        request = self.folder.REQUEST
-
-        mapping['foo'] = explorerportlet.Assignment()
-        editview = getMultiAdapter((mapping['foo'], request), name='edit')
-        self.failUnless(isinstance(editview, explorerportlet.EditForm))
 
     def test_obtain_renderer(self):
         context = self.folder
@@ -55,16 +54,13 @@ class TestPortlet(TestCase):
         view = self.folder.restrictedTraverse('@@plone')
         manager = getUtility(IPortletManager, name='plone.rightcolumn', context=self.portal)
 
-        # TODO: Pass any keyword arguments to the Assignment constructor
         assignment = explorerportlet.Assignment()
 
         renderer = getMultiAdapter((context, request, view, manager, assignment), IPortletRenderer)
         self.failUnless(isinstance(renderer, explorerportlet.Renderer))
 
-class TestRenderer(TestCase):
 
-    def afterSetUp(self):
-        self.setRoles(('Manager',))
+class TestRenderer(TestCase):
 
     def renderer(self, context=None, request=None, view=None, manager=None, assignment=None):
         context = context or self.folder
@@ -72,17 +68,19 @@ class TestRenderer(TestCase):
         view = view or self.folder.restrictedTraverse('@@plone')
         manager = manager or getUtility(IPortletManager, name='plone.rightcolumn', context=self.portal)
 
-        # TODO: Pass any default keyword arguments to the Assignment constructor
         assignment = assignment or explorerportlet.Assignment()
         return getMultiAdapter((context, request, view, manager, assignment), IPortletRenderer)
 
     def test_render(self):
-        # TODO: Pass any keyword arguments to the Assignment constructor
-        r = self.renderer(context=self.portal, assignment=explorerportlet.Assignment())
-        r = r.__of__(self.folder)
+        r = self.renderer(context=self.portal, assignment=explorerportlet.Assignment(topLevel=0))
+        r = r.__of__(self.portal)
         r.update()
         output = r.render()
-        # TODO: Test output
+        self.assertEqual(output.count("toggleNode"), 3)
+        self.failUnless("kssattr-uid-%s" % self.portal.events.UID() in output)
+        self.failUnless("kssattr-uid-%s" % self.portal.news.UID() in output)
+        self.failUnless("kssattr-uid-%s" % self.portal.Members.UID() in output)
+
 
 def test_suite():
     from unittest import TestSuite, makeSuite

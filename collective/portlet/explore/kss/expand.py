@@ -1,3 +1,4 @@
+from zope.interface import implements
 from Acquisition import aq_inner
 from kss.core import kssaction
 from plone.portlets.utils import unhashPortletInfo
@@ -12,6 +13,8 @@ from plone.app.layout.navigation.navtree import buildFolderTree
 
 
 class DecorateStrategy:
+    implements(INavtreeStrategy)
+
     def __init__(self, root, strategy):
         self.strategy=strategy
         self.root = "/".join(root.getPhysicalPath())

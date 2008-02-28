@@ -5,6 +5,8 @@ from Testing import ZopeTestCase as ztc
 
 from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase.layer import onsetup
+from kss.core.tests.base import KSSLayer, KSSViewTestCase 
+
 
 @onsetup
 def setup_product():
@@ -37,6 +39,10 @@ class TestCase(ptc.PloneTestCase):
     """Base class used for test cases
     """
 
-class FunctionalTestCase(ptc.FunctionalTestCase):
-    """Test case class used for functional (doc-)tests
-    """
+    def afterSetUp(self):
+        self.setRoles(('Manager',))
+
+
+class KSSTestCase(TestCase, KSSViewTestCase):
+    class layer(KSSLayer, TestCase.layer):
+        pass
