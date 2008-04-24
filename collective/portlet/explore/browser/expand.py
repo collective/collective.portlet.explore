@@ -70,6 +70,7 @@ class ExpandMenu(PloneKSSView):
 
         selector="div#portletwrapper-%s span.kssattr-uid-%s" % (portlethash,uid)
         core.removeClass(selector, "toggleNode")
+        core.removeClass(selector, "expandedNode")
         if len(data.get('children')) > 0 and len(data.get('children')[0].get('children')) > 0:
             core.addClass(selector, "expandedNode")
         else:
