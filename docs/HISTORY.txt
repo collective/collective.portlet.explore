@@ -4,6 +4,11 @@ Changelog
 1.0 - unreleased
 ----------------
 
+- Explicitly disable event bubbling for twistie clicks. This is not an issue
+  for the standard markup, but makes things easier for customizations which
+  put the twistie inside an anchor.
+  [wichert]
+
 - Correctly set the CSS class for the twistie for already opened folders
   to exapendedNode.
   [wichert]
