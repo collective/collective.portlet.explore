@@ -9,7 +9,7 @@
 
     <five:registerPackage package="." />
 
-    <include package=".kss" />
+    <include package=".browser" />
 
     <i18n:registerTranslations directory="locales"/>
 

@@ -8,6 +8,9 @@ Changelog
   to exapendedNode.
   [wichert]
 
+- Rename local kss module to browser to prevent conflicts with top level
+  kss.
+  [wichert]
 
 1.0b1 - March 6, 2008
 ---------------------
