@@ -21,21 +21,20 @@
     tal:attributes="class string:navTreeItem visualNoMarker${li_class}${li_extr_class}${li_folder_class} node-${UID}"
     tal:condition="python:bottomLevel &lt;= 0 or level &lt;= bottomLevel">
 
-    <tal:level define="item_class string:state-${node/normalized_review_state}">
+    <tal:level define="item_class string:state-${node/normalized_review_state};
+                       item_class python:is_current and item_class + ' navTreeCurrentItem' or item_class">
 
-    <span class="toggleNode"
-          title="Click to expand or collapse"
-          tal:condition="show_children"
-          tal:attributes="class string:kssattr-uid-${UID} toggleNode"
-          i18n:domain="collective.portlet.explore"
-          i18n:attributes="title label_expand_menu_menu">
-     Expand</span>
+        <span class="toggleNode"
+              title="Click to expand or collapse"
+              tal:condition="show_children"
+              tal:attributes="class string:kssattr-uid-${UID} toggleNode"
+              i18n:domain="collective.portlet.explore"
+              i18n:attributes="title label_expand_menu_menu">
+         Expand</span>
 
-    <span class="noChildren"
-          tal:condition="not:show_children">
-     &nbsp;</span>
-
-    <tal:block define="item_class python:is_current and item_class + ' navTreeCurrentItem' or item_class">
+        <span class="noChildren"
+              tal:condition="not:show_children">
+         &nbsp;</span>
 
         <a tal:attributes="href python:link_remote and remote_url or item_url;
                            title node/Description;
@@ -43,12 +42,11 @@
             <img tal:replace="structure item_icon/html_tag" />
             <span tal:content="node/Title">Selected Item Title</span>
         </a>
-    </tal:block>
 
-    <ul tal:attributes="class python:'navTree navTreeLevel'+str(level)"
-        tal:condition="python: len(children) > 0 and show_children">  
-        <span tal:replace="structure python:view.recurse(children=children, level=level+1, bottomLevel=bottomLevel)" />
-    </ul>
+        <ul tal:attributes="class python:'navTree navTreeLevel'+str(level)"
+            tal:condition="python: len(children) > 0 and show_children">  
+            <span tal:replace="structure python:view.recurse(children=children, level=level+1, bottomLevel=bottomLevel)" />
+        </ul>
     </tal:level>
 </li>
 </tal:navitem>
