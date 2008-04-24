@@ -4,18 +4,24 @@ Changelog
 1.0 - unreleased
 ----------------
 
+
+
+1.0rc1 - April 24, 2008
+-----------------------
+
 - Explicitly disable event bubbling for twistie clicks. This is not an issue
   for the standard markup, but makes things easier for customizations which
   put the twistie inside an anchor.
   [wichert]
 
 - Correctly set the CSS class for the twistie for already opened folders
-  to exapendedNode.
+  to expandedNode.
   [wichert]
 
 - Rename local kss module to browser to prevent conflicts with top level
   kss.
   [wichert]
+
 
 1.0b1 - March 6, 2008
 ---------------------
