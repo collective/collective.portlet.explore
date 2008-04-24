@@ -35,7 +35,7 @@
           tal:condition="not:show_children">
      &nbsp;</span>
 
-    <div tal:define="item_class python:is_current and item_class + ' navTreeCurrentItem' or item_class">
+    <tal:block define="item_class python:is_current and item_class + ' navTreeCurrentItem' or item_class">
 
         <a tal:attributes="href python:link_remote and remote_url or item_url;
                            title node/Description;
@@ -43,7 +43,7 @@
             <img tal:replace="structure item_icon/html_tag" />
             <span tal:content="node/Title">Selected Item Title</span>
         </a>
-    </div>
+    </tal:block>
 
     <ul tal:attributes="class python:'navTree navTreeLevel'+str(level)"
         tal:condition="python: len(children) > 0 and show_children">  
