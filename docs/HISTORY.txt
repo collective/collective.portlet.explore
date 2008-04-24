@@ -1,6 +1,14 @@
 Changelog
 =========
 
+1.0 - unreleased
+----------------
+
+- Correctly set the CSS class for the twistie for already opened folders
+  to exapendedNode.
+  [wichert]
+
+
 1.0b1 - March 6, 2008
 ---------------------
 
