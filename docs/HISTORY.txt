@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.0 - unreleased
-----------------
+1.0rc2 - March 16, 2009
+-----------------------
 
 - Add HTTPCache statement for twistie images.
   [wichert]
