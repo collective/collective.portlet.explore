@@ -4,6 +4,9 @@ Changelog
 1.0 - unreleased
 ----------------
 
+- Add HTTPCache statement for twistie images.
+  [wichert]
+
 - Update navigation tree for PLIP 126 merge.
   [wichert]
 
