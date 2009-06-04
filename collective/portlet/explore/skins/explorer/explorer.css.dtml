@@ -43,4 +43,9 @@ dl.portletNavigationTree span.showChildren:hover {
   background-image: url(twistie-closed-over.gif);
 }
 
+dl.portletNavigationTree li.nodeLoading span.toggleNode {
+	background: transparent url(tinyspinner.gif) no-repeat scroll 30% 50%;
+}
+
+
 /* </dtml-with> */
