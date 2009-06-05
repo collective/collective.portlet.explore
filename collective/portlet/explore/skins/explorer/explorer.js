@@ -25,7 +25,7 @@ jQuery portletNavigationTree plugin
 				var twistie = $(this);
 				
 				// find ul element
-				var ul = $(this).closest("a").next("ul");
+				var ul = $(this).closest("li").children("ul");
 				if (!ul) return;
 				
 				// toggle class names
