@@ -14,11 +14,7 @@ jQuery portletNavigationTree plugin
 			var portletWrapper = $(this).closest(".portletWrapper");
 			
 			var portletHash = portletWrapper[0] ? portletWrapper[0].id.replace("portletwrapper-","") : "";
-			if (!portletHash) return;
-			
-			// observe clicks on toggle buttons
-			$("span.toggleNode", element).live("click", loadNode);
-			$("span.expandedNode", element).live("click", toggleNode);
+			if (!portletHash) { return; }
 			
 			// Expands or collapses a node of which sub-items already have been loaded.
 			function toggleNode(event){
@@ -26,7 +22,7 @@ jQuery portletNavigationTree plugin
 				
 				// find ul element
 				var ul = $(this).closest("li").children("ul");
-				if (!ul) return;
+				if (!ul) { return; }
 				
 				// toggle class names
 				if (twistie.hasClass("showChildren")){
@@ -50,12 +46,12 @@ jQuery portletNavigationTree plugin
 				// find the li element of the clicked node
 				var node = $(this).closest("li");
 				
-				if (node.hasClass("nodeLoading")) return;
+				if (node.hasClass("nodeLoading")) { return; }
 				
 				// get node uid
 				var uidClassName = node[0].className.match(/node-(\w+)/);
 				var uid = uidClassName ? uidClassName[1] : null;
-				if (!uid) return;
+				if (!uid) { return; }
 				
 				// data to send with request
 				var data = {
@@ -71,6 +67,11 @@ jQuery portletNavigationTree plugin
 					node.replaceWith(html);
 				});
 			}
+
+			// observe clicks on toggle buttons
+			$("span.toggleNode", element).live("click", loadNode);
+			$("span.expandedNode", element).live("click", toggleNode);
+			
 		});
 	};
 	
