@@ -7,7 +7,6 @@
         for="*"
         name="expandNode"
         class=".expand.ExpandMenu"
-        attribute="expandNode"
         permission="zope2.View"
         />
 

@@ -1,9 +1,8 @@
 from zope.interface import implements
 from Acquisition import aq_inner
-from kss.core import kssaction
 from plone.portlets.utils import unhashPortletInfo
-from plone.app.kss.plonekssview import PloneKSSView 
 from plone.app.portlets.utils import assignment_from_key 
+from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
@@ -37,11 +36,11 @@ class DecorateStrategy:
         return self.strategy.subtreeFilter(newNode)
 
 
-class ExpandMenu(PloneKSSView):
+
+class ExpandMenu(BrowserView):
     recurse = ViewPageTemplateFile('../recurse.pt')
 
-    @kssaction
-    def expandNode(self, portlethash, uid):
+    def __call__(self, portlethash, uid):
         """Expand the navtree at a given UID for a given portlet.
         """
 
@@ -61,7 +60,8 @@ class ExpandMenu(PloneKSSView):
         query=queryBuilder()
 
         data=buildFolderTree(root, query=query, strategy=strategy)
-        html=self.recurse(children=data.get('children', []), level=1, bottomLevel=assignment.bottomLevel)
-
+        html=self.recurse(children=data.get('children', []),
+                level=1, bottomLevel=assignment.bottomLevel)
 
         return html.encode('utf8')
+
