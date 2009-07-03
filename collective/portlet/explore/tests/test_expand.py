@@ -1,7 +1,7 @@
 from unittest import TestCase
 from zope.interface.verify import verifyObject
 from plone.app.layout.navigation.interfaces import INavtreeStrategy
-from collective.portlet.explore.kss.expand import DecorateStrategy
+from collective.portlet.explore.browser.expand import DecorateStrategy
 from collective.portlet.explore.tests.base import KSSTestCase
 
 def yes(*args): return True

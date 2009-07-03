@@ -76,10 +76,10 @@ class TestRenderer(TestCase):
         r = r.__of__(self.portal)
         r.update()
         output = r.render()
-        self.assertEqual(output.count("toggleNode"), 3)
-        self.failUnless("kssattr-uid-%s" % self.portal.events.UID() in output)
-        self.failUnless("kssattr-uid-%s" % self.portal.news.UID() in output)
-        self.failUnless("kssattr-uid-%s" % self.portal.Members.UID() in output)
+        self.assertEqual(output.count("navTreeItem"), 3)
+        self.failUnless("node-%s" % self.portal.events.UID() in output)
+        self.failUnless("node-%s" % self.portal.news.UID() in output)
+        self.failUnless("node-%s" % self.portal.Members.UID() in output)
 
 
 def test_suite():
