@@ -31,6 +31,11 @@ jQuery portletNavigationTree plugin
 		// prevent default action of event
 		event.preventDefault();
 		
+		// Find the portlet information
+		var portletWrapper = $(this).closest(".portletWrapper");
+		var portletHash = portletWrapper[0] ? portletWrapper[0].id.replace("portletwrapper-","") : "";
+		if (!portletHash) { return; }
+
 		// find the li element of the clicked node
 		var node = $(this).closest("li");
 		
@@ -57,27 +62,6 @@ jQuery portletNavigationTree plugin
 	}
 
 	// observe clicks on toggle buttons
-	$("span.toggleNode", element).live("click", loadNode);
-	$("span.expandedNode", element).live("click", toggleNode);
-	
-	$.fn.portletNavigationTree = function(options){
-		return this.each(function(){
-			
-			var element = $(this);
-			
-			// find portlet hash from portlet wrapper
-			var portletWrapper = $(this).closest(".portletWrapper");
-			
-			var portletHash = portletWrapper[0] ? portletWrapper[0].id.replace("portletwrapper-","") : "";
-			if (!portletHash) { return; }
-			
-			
-		});
-	};
-	
-	// apply portletNavigationTree plugin on elements with class name "portletNavigationTree" after DOM has loaded
-	$(function(){
-		$(".portletNavigationTree").portletNavigationTree();
-	});
-	
+	$(".portletNavigationTree span.toggleNode").live("click", loadNode);
+	$(".portletNavigationTree span.expandedNode").live("click", toggleNode);
 })(jQuery);
