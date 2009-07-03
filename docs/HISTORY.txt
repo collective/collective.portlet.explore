@@ -1,6 +1,14 @@
 Changelog
 =========
 
+1.0rc3 - July 3, 2009
+---------------------
+
+- Rewrite to use pure jQuery instead of KSS. This reduces page load time
+  by multiple seconds for non-trivial navigation trees on older browsers.
+  [dannyb, andreh, wichert]
+
+
 1.0rc2 - March 16, 2009
 -----------------------
 

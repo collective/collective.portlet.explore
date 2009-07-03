@@ -24,12 +24,8 @@ setup(name='collective.portlet.explore',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          "kss.core",
           "plone.app.layout",
           "plone.app.portlets",
           "plone.portlets",
       ],
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
       )

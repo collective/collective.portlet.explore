@@ -3,16 +3,10 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="collective.portlet.explore">
 
-    <browser:resource
-        name="explorer.kss"
-        file="explorer.kss"
-        />
-
     <browser:page
         for="*"
         name="expandNode"
         class=".expand.ExpandMenu"
-        attribute="expandNode"
         permission="zope2.View"
         />
 
