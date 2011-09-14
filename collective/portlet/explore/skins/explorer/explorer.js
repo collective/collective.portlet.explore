@@ -42,7 +42,7 @@ jQuery portletNavigationTree plugin
 		if (node.hasClass("nodeLoading")) { return; }
 		
 		// get node uid
-		var uidClassName = node[0].className.match(/node-(\w+)/);
+		var uidClassName = node[0].className.match(/node-([\w\-]+)/);
 		var uid = uidClassName ? uidClassName[1] : null;
 		if (!uid) { return; }
 		
