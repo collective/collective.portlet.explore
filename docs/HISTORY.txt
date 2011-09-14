@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.1 - Unreleased
+----------------
+
+- Fix JS regex to match UIDs with dashes in them [jcbrand]
+
 1.0 - June 23, 2011
 -------------------
 
