@@ -7,6 +7,10 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="collective.portlet.explore">
 
+    <include package="Products.CMFCore" file="permissions.zcml"
+        xmlns:zcml="http://namespaces.zope.org/zcml"
+        zcml:condition="have plone-41" />
+
     <five:registerPackage package="." />
 
     <include package=".browser" />
