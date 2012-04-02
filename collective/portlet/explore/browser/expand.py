@@ -9,9 +9,10 @@ from zope.component import getMultiAdapter
 from plone.app.layout.navigation.interfaces import INavtreeStrategy
 from plone.app.layout.navigation.interfaces import INavigationQueryBuilder
 from plone.app.layout.navigation.navtree import buildFolderTree
+from plone.app.layout.navigation.navtree import NavtreeStrategyBase
 
 
-class DecorateStrategy:
+class DecorateStrategy(NavtreeStrategyBase):
     implements(INavtreeStrategy)
 
     def __init__(self, root, strategy):

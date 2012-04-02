@@ -4,10 +4,14 @@ Changelog
 1.1 - Unreleased
 ----------------
 
-- Added conditional include of CMFCore permisssions.zcml for Plone 4.1 support [rbeylerian]
+- Added conditional include of CMFCore permisssions.zcml for Plone 4.1 support
+  [rbeylerian]
 
 - Fix JS regex to match UIDs with dashes in them [jcbrand]
 
+- Fix the NavtreeStrategy to derive from NavtreeStrategyBase in order to have
+  a default supplimentQuery [tiazma]
+  
 1.0 - June 23, 2011
 -------------------
 
