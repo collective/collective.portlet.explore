@@ -28,4 +28,10 @@ setup(name='collective.portlet.explore',
           "plone.app.portlets",
           "plone.portlets",
       ],
+      entry_points="""
+      # -*- Entry points: -*-
+
+      [z3c.autoinclude.plugin]
+      target = plone
+      """,
       )
