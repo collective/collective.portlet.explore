@@ -4,6 +4,8 @@ Changelog
 1.1 - Unreleased
 ----------------
 
+- Added Dutch translation [kysr]
+
 - Added conditional include of CMFCore permisssions.zcml for Plone 4.1 support
   [rbeylerian]
 
