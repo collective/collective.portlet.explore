@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1 - Unreleased
+1.1 - June 19, 2013
 ----------------
 
 - Added Dutch translation [kysr]
